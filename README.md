@@ -5,4 +5,4 @@
    
 2. We can Observation to define custom metrics
 
-3. We can use spring native to optimize application startup time
+3. @HttpExchange annotation
