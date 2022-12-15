@@ -3,6 +3,6 @@
 1. All javax package converted into jakarta
    eg. HttpServletRequest is now available in jakarta.servlet.http
    
+2. We can Observation to define custom metrics
 
-
-We can use spring native to optimize application startup time
+3. We can use spring native to optimize application startup time
