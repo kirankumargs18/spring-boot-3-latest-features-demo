@@ -1,0 +1,53 @@
+WORKING WITH @HttpExchange
+==========================
+
+
+
+Create two services
+===================
+
+add dependencies ---> spring web, spring webflux
+
+let's assume we have one service as customer service and another services as customer client service where it
+consumes customer service
+
+customer service is normal spring boot REST API
+
+
+
+
+
+To consume that service we need to do
+following changes in customer client service
+============================================
+
+create one interface and annotate that with @HttpExchange as below
+
+@HttpExchange("/api/v1/customer-service")
+public interface CustomerClientService {
+	
+	@GetExchange
+	 List<Customer> getAllCustomersFromCustomerService();
+
+}
+
+we need to create configuration class also as below
+
+@Configuration
+public class AppClientConfig {
+	
+	@Bean
+	public WebClient webClient() {
+		return WebClient.builder()
+				.baseUrl("http://localhost:8080")
+				.build();
+	}
+	
+	@Bean
+	public CustomerClientService customerClientService() {
+		HttpServiceProxyFactory httpServiceProxyFactory=HttpServiceProxyFactory.
+				builder(WebClientAdapter.forClient(webClient())).
+				build();
+		return httpServiceProxyFactory.createClient(CustomerClientService.class);
+	}
+}
