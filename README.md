@@ -5,4 +5,4 @@
    
 2. We can Observation to define custom metrics
 
-3. @HttpExchange annotation
+3. @HttpExchange annotation something similar to FeignClient
